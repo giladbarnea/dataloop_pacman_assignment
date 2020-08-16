@@ -3,7 +3,8 @@ import numpy
 from operator import add, sub
 
 
-def noop(num):
+def noop(num, val):
+    # does nothing
     return num
 
 
@@ -16,6 +17,19 @@ class Ghost:
     def set_min_steps_to_pacman(self, pac_x, pac_y):
         # this is the minimal (optimal) number of steps to reach pacman, as if there were no walls
         self._min_steps_to_pacman = abs(pac_x - self.x) + abs(pac_y - self.y)
+    
+    @staticmethod
+    def calculate_next_coord(ghost_coord: int, pac_coord: int):
+        if pac_coord != ghost_coord:
+            # we should try to get closer on the x axis
+            if pac_coord > ghost_coord:
+                operator = add
+            else:
+                # pac_coord < ghost_coord
+                operator = sub
+            ideal_next_coord = operator(ghost_coord, 1)
+            return ideal_next_coord
+        return None
 
 
 def main(board):
@@ -48,30 +62,17 @@ def main(board):
         # decide U/R/D/L
         
         pac_x, pac_y = pacman
+        ideal_next_x = ghost.calculate_next_coord(ghost.x, pac_x)
+        idea_next_y = ghost.y
         
-        if pac_x != ghost.x:
-            # we should try to get closer on the x axis
-            
-            if pac_x > ghost.x:
-                x_operator = add
-            else:
-                # pac_x < ghost.x
-                x_operator = sub
-            ideal_next_x = x_operator(ghost.x, 1)
-            ideal_next_y = ghost.y3
-        else:
-            if pac_y != ghost.y:
-                if pac_y > ghost.y:
-                    y_operator = add
-                else:
-                    # pac_y < ghost.y
-                    y_operator = sub
-            else:
-                sys.exit('ghost coords are the same as pacman coords! game over')
+        # TODO:
+        #  if next point has no walls and other ghosts, move towards it
+        #  if it does, call ghost.calculate_next_coord again with y
+        #  if that's impossible as well, see which of the  
 
 
 if __name__ == '__main__':
-    # TODO: --board 'file.npy'
+    # TODO: --board 'file.npy' with OptParse
     board = [[]]
     
     main(board)
