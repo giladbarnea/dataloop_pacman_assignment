@@ -1,13 +1,8 @@
 # dataloop_pacman_assignment
 
-## What did I do?
-For every ghost, I query its surrounding cells and understand what my walking options are.
-For every walking option, I calculate if it's closer or farther away from PacMan.
-I take the closer-to-PacMan-move, add it to my walking-distance counter, and repeat the same process excluding the step I already took to avoid walking backwards.
+I calculated each ghost's current distance from pacman, and tried to discern which way (up / right / down / left) is best in terms of getting closer to pacman.
+Ideally (i.e. if there were no obstacles), only pacman's coords would dictate each ghost's next step (i.e. if pacman's x > ghost.x, move to (ghost.x+1, ghost.y)).  
+If this move is impossible because of walls or other ghosts, I would try the same process for the other coordinate that would get me closer to pacman, and if that wasn't possible, I would try to understand which one of the remaining coordinates (both get me farther away from pacman) is available, and move there.
 
-## How did I do it?
-I first had to figure out how to work with .npy very quickly.
-...
-
-## What can be improved?
-I realize that this approach can be further optimised because sometimes there might be unexpected walls or other ghosts which block the road to get to PacMan. That challenges the whole assumption that every step brings me closer to PacMan. I'm not sure what the best way to approach that optimization, but with more time I can try to figure it out! ;p
+If I had more time, I would implement the above recursively for each step, and also try to understand if it's possible to calculate the BEST step among available steps, without breaking complexity. 
+I would also translate the implementation to use the board from the .npy file instead of a simple list of lists. 

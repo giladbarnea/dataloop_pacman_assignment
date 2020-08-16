@@ -68,7 +68,7 @@ def main(board):
         # TODO:
         #  if next point has no walls and other ghosts, move towards it
         #  if it does, call ghost.calculate_next_coord again with y
-        #  if that's impossible as well, see which of the  
+        #  if that's impossible as well, see which of the
 
 
 if __name__ == '__main__':
