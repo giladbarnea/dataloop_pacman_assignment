@@ -58,7 +58,7 @@ def main(board):
                 # pac_x < ghost.x
                 x_operator = sub
             ideal_next_x = x_operator(ghost.x, 1)
-            ideal_next_y = ghost.y
+            ideal_next_y = ghost.y3
         else:
             if pac_y != ghost.y:
                 if pac_y > ghost.y:
